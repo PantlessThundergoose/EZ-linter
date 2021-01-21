@@ -16,7 +16,7 @@ function SourceType(props) {
 
   return (
     <div className="option">
-      <h2 style={{ color: 'white' }}>Source Type</h2>
+      <h2 style={{ color: '457b9d' }}>Source Type</h2>
       <div className="dropDown" style={{ minWidth: '200px' }}>
         <Select
           defaultValue={defaultValue}

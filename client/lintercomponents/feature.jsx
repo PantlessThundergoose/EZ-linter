@@ -13,7 +13,7 @@ function Feature(props) {
   }
   if (featureValue){
     opacity = "100%"
-    backgroundColor = '#06d6a0';
+    backgroundColor = '#f2cc8f';
   } 
 
   return (
