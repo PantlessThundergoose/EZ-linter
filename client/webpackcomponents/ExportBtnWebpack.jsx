@@ -1,7 +1,7 @@
 import React from 'react';
 import { exportPlainTextFile } from '../lib/exportJson';
 
-const ExportBtn = ({ config }) => {
+const ExportBtnWebpack = ({ config }) => {
   const prettyJson = JSON.stringify(config, null, 2);
 
   return (
@@ -9,12 +9,12 @@ const ExportBtn = ({ config }) => {
       <button
         id="export-btn"
         className="ui-btn"
-        onClick={() => exportPlainTextFile(prettyJson, '.eslintrc.json')}
+        onClick={() => exportPlainTextFile(config.replace(/(\r\n|\n|\r)/gm, "  "), 'webpack.config.js')}
       >
-        Export .eslintrc.json
+        Export webpack.config.js
       </button>
     </div>
   );
 };
 
-export default ExportBtn;
+export default ExportBtnWebpack;

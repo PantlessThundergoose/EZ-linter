@@ -14,7 +14,7 @@ import SignInBtn from '../lintercomponents/SignInBtn.jsx';
 import SaveConfigBtn from '../lintercomponents/SaveConfigBtn.jsx';
 import SavedConfigs from '../lintercomponents/SavedConfigs.jsx';
 
-import ExportBtn from '../lintercomponents/ExportBtn.jsx';
+import ExportBtnWebpack from './ExportBtnWebpack.jsx';
 
 class mainWebpack extends Component {
   constructor(props) {
@@ -50,41 +50,6 @@ class mainWebpack extends Component {
 
   updateCode(header, rule){
     
-    const { config } = this.state;
-
-    let currLibrary = this.state.library;
-
-    //this section makes mainLibrary selection mutually exclusive
-    // if (header === "mainLibrary"){
-      
-    // }
-
-    //   //iterate over header values, save index of values that = true
-    //   const headerVals = Object.values(config[header]);
-    //   const trueIndices = [];
-    //   for (let i = 0; i < headerVals.length; i++){
-    //     if (headerVals[i] === true) trueIndices.push(i);
-    //   }
-
-    //   console.log(`these are the indices of vals that = true: ${trueIndices}`);
-        
-    //   //iterate over true indices, change key at that index to false
-    //   if (trueIndices.length > 0){
-    //     for (let j = 0; j < trueIndices.length; j++ ){
-    //       let keyToChange = Object.keys(config[header])[j];
-    //       console.log(`This rule's value is true: ${keyToChange}`)
-    //       this.setState(...this.state, config: {
-      // ...this.state.config,
-      // [header]: {
-      //   ...this.state.config[header],
-      //   [keyToChange]: false,
-      // };
-    //     }
-    //   }
-    // }
-
-    // console.log(`contents of mainLibrary: ${this.state.config.mainLibrary}`);
-
     let newBool;
     const currBool = this.state.config[header][rule];
     newBool = !currBool;
@@ -153,7 +118,7 @@ class mainWebpack extends Component {
     return (
       <div id='mainwebpack'>
         <div id="topButtons">
-          <ExportBtn config={(this.state.code === '' ? "Please select options from EZCode" : this.state.code)} />
+          <ExportBtnWebpack config={(this.state.code === '' ? "Please select options from EZCode" : this.state.code)} />
           {/*{this.props.isLoggedIn ? (
             <SaveConfigBtn
               config={this.state.config}

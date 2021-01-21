@@ -23,7 +23,7 @@ function Version(props) {
 
   return (
     <div className="option">
-      <h2 style={{ color: 'white' }}>ECMA Version</h2>
+      <h2 style={{ color: '457b9d' }}>ECMA Version</h2>
       <div className="dropDown" style={{ minWidth: '200px' }}>
         <Select
           defaultValue={defaultValue}
