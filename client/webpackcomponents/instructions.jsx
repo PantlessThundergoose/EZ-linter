@@ -30,31 +30,28 @@ function Instructions() {
             </a>
             &nbsp;(<code>^10.12.0</code>, or <code>>=12.0.0</code>) built with SSL support. (If you are using an official Node.js distribution, SSL is always built in.)
           </p>
-          <p>To use ESLint, simply:</p>
+          <p>To use Webpack, simply:</p>
           <ol>
-            <li>Install it globally or locally using npm or yarn:</li>
+            <li>Create a directory, initialize npm, install webpack locally, and install the webpack-cli:</li>
             <pre>
               <code>
-                npm install eslint --save-dev // local install <br />
-
-                # or <br />
-
-                yarn add eslint --dev // local install <br />
+                mkdir ez-webpack-demo <br />
+                cd ez-webpack-demo <br />
+                npm init -y <br />
+                npm install webpack webpack-cli webpack-dev-server --save-dev
+                <br />
               </code>
             </pre>
-            <li>Set your desired configurations and export the '.eslintrc.json' file</li>
-            <li>Save the exported file in your project's root directory</li>
-            <li>Run ESLint on any file or directory like this:</li>
+            <li>Set your desired configurations and copy the webpack configuration template.</li>
+            <li>Save the copied contents into a webpack.config.js file in your project's root directory.</li>
+            <li>Add the following scripts to your package.json file, as well as installing all relevant dependencies.</li>
             <pre>
               <code>
-                npx eslint yourfile.js <br />
-
-                # or <br />
-
-                yarn run eslint yourfile.js <br />
+              "build-dev": "webpack --mode development",<br/>
+              "build-prod": "webpack --mode production"<br/>
               </code>
             </pre>
-            <p><strong>*If you're using the ESLint extension in your text editor, you can skip step #4 and ensure that the extension is installed and enabled</strong></p>
+            <p><strong></strong></p>
           </ol>
         </div>
       ) : null}

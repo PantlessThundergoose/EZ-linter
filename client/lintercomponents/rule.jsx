@@ -5,18 +5,18 @@ function Rule(props) {
   const { ruleName, ruleValue, updateRule } = props;
 
   // determining the background-color of rule based on ruleValue
-  let opacity = "30%";
+  let opacity = "100%";
   // rgb val of '$black2'
-  let backgroundColor = "rgb(0,0,0,0.4)";
+  let backgroundColor = "#f0efeb";
   if (ruleValue === 1) {
     opacity = "100%";
     // hex val of '$orange'
-    backgroundColor = "#a3cacf";
+    backgroundColor = "#f77f00";
   } 
   else if (ruleValue === 2) {
     opacity = "100%";
     // hex val of'$red'
-    backgroundColor = "#8f1a00";
+    backgroundColor = "#e63946";
   }
 
   return(

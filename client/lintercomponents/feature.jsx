@@ -8,12 +8,12 @@ function Feature(props) {
   let backgroundColor;
   let opacity;
   if (!featureValue) {
-    opacity = "30%"
-    backgroundColor = 'rgb(0,0,0,0.4)';
+    opacity = "100%"
+    backgroundColor = '#f0efeb';
   }
   if (featureValue){
     opacity = "100%"
-    backgroundColor = 'green';
+    backgroundColor = '#06d6a0';
   } 
 
   return (

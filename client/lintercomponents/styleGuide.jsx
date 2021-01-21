@@ -4,11 +4,11 @@ function StyleGuide(props){
   // destructure props
   const { styleGuideStatus, guide, loadPresets } = props;
 
-  let opacity = "30%";
-  let backgroundColor = "rgb(0,0,0,0.4)";
+  let opacity = "100%";
+  let backgroundColor = "#f0efeb";
   if (styleGuideStatus) {
     opacity = "100%";
-    backgroundColor = "green";
+    backgroundColor = "#06d6a0";
   } 
 
   return (
