@@ -16,17 +16,17 @@ class Code extends Component{
         const modules = []
         const plugins = [];
 
-        // for (let i = 0; i < this.props.imports.length; i++){
-        //     imports.push(<Import name={this.props.imports[i].name} path={this.props.imports[i].path} />);
-        // }
+        for (let i = 0; i < this.props.imports.length; i++){
+            imports.push(<Import key={`import#${i}`} name={this.props.imports[i].name} path={this.props.imports[i].path} />);
+        }
         
-        // for (let i = 0; i < this.props.modules.length; i++){
-        //     modules.push(<Module file={this.props.modules[i].test} loaderArray={this.props.modules[i].loaders} useArray={this.props.modules[i].use}/>)
-        // }
+        for (let i = 0; i < this.props.modules.length; i++){
+            modules.push(<Module key={`module#${i}`} file={this.props.modules[i].test} loaderArray={this.props.modules[i].loaders} useArray={this.props.modules[i].use}/>)
+        }
         
-        // for (let i = 0; i < this.props.plugins.length; i++){
-        //     plugins.push(<Plugin plugins={this.props.plugins[i].plugins} />);
-        // }
+        for (let i = 0; i < this.props.plugins.length; i++){
+            plugins.push(<Plugin key={`plugin#${i}`} plugins={this.props.plugins[i]} />);
+        }
 
         return(
             <div id='webpackcode'>
@@ -46,9 +46,9 @@ class Code extends Component{
                             {'    '}{'    '}rules: [
                             {modules}
                             {'    '}{'    '}]<br/>
-                            {'    '}{'}'}<br/>
+                            {'    '}{'},'}<br/>
                             {plugins}
-                        {'}'} <br/>
+                        {'};'} <br/>
                         <br/>
                         module.exports = config;
                     </code>
