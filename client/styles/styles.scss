@@ -1,6 +1,7 @@
 @import 'palette';
 @import 'fonts';
 @import 'title';
+@import 'home';
 @import 'login';
 @import 'config';
 @import 'navbar';
@@ -8,7 +9,7 @@
 @import 'webpack';
 
 // setting variables for reference
-$background: white;
+$background: $offwhite;
 
 body {
   background: $background;
@@ -96,10 +97,10 @@ h3 {
 .Item {
   color: $jet;
   cursor: pointer;
-  opacity: 30%;
+  // opacity: 30%;
   background-color: $black2;
-  border: medium solid $white;
-  border-radius: 25px;
+  // border: medium solid $jet;
+  // border-radius: 25px;
   display: flex;
   align-items: center;
   justify-content: center;

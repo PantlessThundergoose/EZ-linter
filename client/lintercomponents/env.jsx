@@ -6,14 +6,14 @@ function Env(props) {
   const { envName, envValue, updateEnv } = props;
   // determining the background-color of rule based on envValue
   let backgroundColor;
-  let opacity = "30%";
+  let opacity = "100%";
   if (!envValue){
-    opacity = "30%";
-    backgroundColor = 'rgb(0,0,0,0.4)';
+    opacity = "100%";
+    backgroundColor = '#f0efeb';
   }
   if (envValue) {
     opacity = "100%";
-    backgroundColor = 'green';
+    backgroundColor = '#06d6a0';
   }
 
   return (

@@ -34,6 +34,28 @@ class mainWebpack extends Component {
   }
 
   updateCode(header, rule){
+    //if header is mainLibrary
+    //& it has a rule with value true
+    //set it to false before doing the rest of this...
+
+    // if (header === "mainLibrary"){
+
+    //   const { config } = this.state;
+
+    //   console.log(`values in mainlibrary - ${Object.values(config[header])}`);
+    //   const valIndex = Object.values(config[header]).indexOf(true);
+      
+    //   if (valIndex > -1){
+
+    //     console.log(`keys in mainlibrary - ${Object.keys(config[header])}`);
+        
+    //     keyToChange = Object.keys(config[header])[valIndex];
+        
+    //     config[header][keyToChange] = false;
+        
+    //     console.log(`keys & values in mainlibrary - ${Object.entries(config[header])}`);
+    //   }    
+    // }
     let newBool;
     const currBool = this.state.config[header][rule];
     newBool = !currBool;
@@ -77,6 +99,16 @@ class mainWebpack extends Component {
     }, imports: [...newImports], modules: [...newModules], plugins: [...newPlugins]});
 
   }
+
+  componentDidMount() {
+    // attempt to retrieve the user's saved configs
+    fetch('api/user/savedconfigs').then((res) => {
+      if (res.status === 200) {
+        res.json().then((data) => {
+          this.setState({ isLoggedIn: true });
+        });
+      }
+  })};
 
   render() {
 

@@ -18,13 +18,6 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <Link to="/linter">
-          <button>EZ-Linter</button>
-        </Link>
-        <Link to="/webpack">
-          <button>EZ-Pack</button>
-        </Link>
-
         <div id="entry">
           <Switch>
             <Route path="/shared/:id" children={<MainRenderer />} />

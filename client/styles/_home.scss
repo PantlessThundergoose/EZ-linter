@@ -1,0 +1,20 @@
+#homebtns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    button{
+        font-size: 24px;
+        padding: 16px 32px;
+        background-color: $ming;
+        color: white;
+        border: none;
+        outline: none;
+        margin: 64px;
+
+        &:hover{
+            font-weight: bold;
+        }
+    }
+}
