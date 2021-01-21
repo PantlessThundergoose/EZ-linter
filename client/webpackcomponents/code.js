@@ -31,7 +31,7 @@ class Code extends Component{
         return(
             <div id='webpackcode'>
                 <pre>
-                    <code>
+                    <code id='code'>
                         <Import name='webpack' path='webpack' />
                         <Import name='path' path='path' />
                         {imports}
@@ -43,11 +43,11 @@ class Code extends Component{
                             {'    '}{'    '}filename: <span style={{color:'#2a9d8f'}} >'bundle.js'</span> <br/>
                             {'    '}{'}'},<br/>
                             {'    '}module: {'{'} <br/>
-                            {'    '}{'    '}rules: [
-                            {modules}
+                            {'    '}{'    '}rules: [<br/>
+                            {modules}<br/>
                             {'    '}{'    '}]<br/>
                             {'    '}{'},'}<br/>
-                            {plugins}
+                            {'    '}{'    '}plugins: [<span style={{color:'#f4a261'}} >{plugins}</span><br/>]<br/>
                         {'};'} <br/>
                         <br/>
                         module.exports = config;

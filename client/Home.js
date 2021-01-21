@@ -6,18 +6,13 @@ import {
   Link,
   useParams,
 } from 'react-router-dom';
-import SignInBtn from './lintercomponents/SignInBtn.jsx';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {isLoggedIn: false};
   }
   render() {
     return <div id='main'>
-      <div id="topButtons">
-        <SignInBtn isLoggedIn={this.state.isLoggedIn} />
-      </div>
       <div id="content">
           <header id="title">
             <h1>{'{ CodeEZ }'}</h1>
@@ -37,3 +32,4 @@ class Home extends Component {
 }
 
 export default Home;
+// // // 

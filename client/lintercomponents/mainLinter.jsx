@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Config from './config.jsx';
 import Instructions from './instructions.jsx';
 import ourState from './state.js';
+import {Link} from 'react-router-dom';
+
+import BackButton from '../webpackcomponents/backButton.js'
 
 // import * as Actions from './actions/actions.js'
 import ExportBtn from './ExportBtn.jsx';
@@ -21,7 +24,6 @@ class MainLinter extends Component {
       allEnvironments: false,
       styleGuideStatus: false,
       savedConfigs: [],
-      isLoggedIn: false,
     };
 
     this.updateRule = this.updateRule.bind(this);
@@ -256,7 +258,8 @@ class MainLinter extends Component {
     fetch('api/user/savedconfigs').then((res) => {
       if (res.status === 200) {
         res.json().then((data) => {
-          this.setState({ isLoggedIn: true, savedConfigs: data.configs });
+          this.props.updateLogin(true);
+          this.setState({savedConfigs: data.configs });
         });
       }
     });
@@ -291,7 +294,7 @@ class MainLinter extends Component {
         <div id="topButtons">
           <ImportBtn importHandler={this.importConfig} />
           <ExportBtn config={config} />
-          {this.state.isLoggedIn ? (
+          {this.props.isLoggedIn ? (
             <SaveConfigBtn
               config={this.state.config}
               addSavedConfig={this.addSavedConfig}
@@ -299,15 +302,21 @@ class MainLinter extends Component {
             />
           ) : null}
           <ShareBtn config={config} />
-          <SignInBtn isLoggedIn={this.state.isLoggedIn} />
+
+          <div id="signin-btn">
+          <BackButton />
+          <SignInBtn isLoggedIn={this.props.isLoggedIn} />
+          </div>
         </div>
 
         <div id="content">
           <header id="title">
+          <Link to="/">
             <h1>{'{ EZ-linter }'}</h1>
             <div id="subheader">ESLint configs that don't suck.</div>
+          </Link>
           </header>
-          {this.state.isLoggedIn ? (
+          {this.props.isLoggedIn ? (
             <div>
               {this.state.savedConfigs.length ? <h3>Saved Configs:</h3> : null}
               <SavedConfigs

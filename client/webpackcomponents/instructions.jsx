@@ -42,8 +42,9 @@ function Instructions() {
                 <br />
               </code>
             </pre>
-            <li>Set your desired configurations and copy the webpack configuration template.</li>
-            <li>Save the copied contents into a webpack.config.js file in your project's root directory.</li>
+            <li>Set your desired configurations and press the export button to get your webpack.config.js file.</li>
+            <li>Alternatively, your configuration is being copied to your clipboard, so you may paste it into an already created webpack.config.js file.</li>
+            {/* <li>Save the copied contents into a webpack.config.js file in your project's root directory.</li> */}
             <li>Add the following scripts to your package.json file, as well as installing all relevant dependencies.</li>
             <pre>
               <code>

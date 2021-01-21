@@ -6,9 +6,7 @@ const ourState = {
       "Vue": false
     },
     "uiLibrary": {
-      "Bootstrap": false,
-      "Tailwind CSS": false,
-      "Material-UI": false      
+      "Bootstrap": false,    
     },
     "Transpiler": {
       "Babel": false,
@@ -17,7 +15,6 @@ const ourState = {
     "Styling": {
       "CSS": false,
       "CSS Modules": false,
-      "PostCSS": false,
       "Sass": false,
       "Less": false,
       "stylus": false
@@ -30,9 +27,6 @@ const ourState = {
       "moment": false,
       "lodash": false
     },
-    "Optimization": {
-      "Code split vendors": false,
-    },
     "Webpack Plugins": {
       "HTML webpack plugin": false,
       "Webpack bundle analyze": false,
@@ -40,9 +34,6 @@ const ourState = {
       "CopyWebpack plugin": false,
       "CleanWebpack plugin": false
     },
-    "React":{
-      "React hot loader": false,
-    }
   }
   
   export default ourState;

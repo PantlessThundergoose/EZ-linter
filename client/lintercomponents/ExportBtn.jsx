@@ -9,9 +9,9 @@ const ExportBtn = ({ config }) => {
       <button
         id="export-btn"
         className="ui-btn"
-        onClick={() => exportPlainTextFile(prettyJson, '.eslintrc.json')}
+        onClick={() => exportPlainTextFile(config.replace(/(\r\n|\n|\r)/gm, "  "), 'webpack.config.js')}
       >
-        Export .eslintrc.json
+        Export webpack.config.js
       </button>
     </div>
   );

@@ -4,6 +4,9 @@ import Instructions from './instructions.jsx';
 import Code from './code.js';
 import ourState from './state.js';
 import ourProps from './properties.js';
+import {Link} from 'react-router-dom';
+
+import BackButton from './backButton';
 
 //importing buttons from lintercomponents folder
 import ShareBtn from '../lintercomponents/ShareBtn.jsx';
@@ -11,21 +14,25 @@ import SignInBtn from '../lintercomponents/SignInBtn.jsx';
 import SaveConfigBtn from '../lintercomponents/SaveConfigBtn.jsx';
 import SavedConfigs from '../lintercomponents/SavedConfigs.jsx';
 
+import ExportBtn from '../lintercomponents/ExportBtn.jsx';
+
 class mainWebpack extends Component {
   constructor(props) {
     super(props);
     
     this.state = {
+      librarySelected: null,
       config: ourState,
       props: ourProps,
       savedConfigs: [],
       imports: [],
       modules: [],
       plugins: [],
-      isLoggedIn: false,
+      code: '', 
     };
 
     this.addSavedConfig = this.addSavedConfig.bind(this);
+    this.removeSavedConfig = this.removeSavedConfig.bind(this);
     this.updateCode = this.updateCode.bind(this);
   }
 
@@ -33,29 +40,51 @@ class mainWebpack extends Component {
     this.setState({ savedConfigs: this.state.savedConfigs.concat(configObj) });
   }
 
+  removeSavedConfig(name) {
+    this.setState({
+      savedConfigs: this.state.savedConfigs.filter(
+        (configObj) => configObj.name !== name
+      ),
+    });
+  }
+
   updateCode(header, rule){
-    //if header is mainLibrary
-    //& it has a rule with value true
-    //set it to false before doing the rest of this...
+    
+    const { config } = this.state;
 
+    let currLibrary = this.state.library;
+
+    //this section makes mainLibrary selection mutually exclusive
     // if (header === "mainLibrary"){
-
-    //   const { config } = this.state;
-
-    //   console.log(`values in mainlibrary - ${Object.values(config[header])}`);
-    //   const valIndex = Object.values(config[header]).indexOf(true);
       
-    //   if (valIndex > -1){
-
-    //     console.log(`keys in mainlibrary - ${Object.keys(config[header])}`);
-        
-    //     keyToChange = Object.keys(config[header])[valIndex];
-        
-    //     config[header][keyToChange] = false;
-        
-    //     console.log(`keys & values in mainlibrary - ${Object.entries(config[header])}`);
-    //   }    
     // }
+
+    //   //iterate over header values, save index of values that = true
+    //   const headerVals = Object.values(config[header]);
+    //   const trueIndices = [];
+    //   for (let i = 0; i < headerVals.length; i++){
+    //     if (headerVals[i] === true) trueIndices.push(i);
+    //   }
+
+    //   console.log(`these are the indices of vals that = true: ${trueIndices}`);
+        
+    //   //iterate over true indices, change key at that index to false
+    //   if (trueIndices.length > 0){
+    //     for (let j = 0; j < trueIndices.length; j++ ){
+    //       let keyToChange = Object.keys(config[header])[j];
+    //       console.log(`This rule's value is true: ${keyToChange}`)
+    //       this.setState(...this.state, config: {
+      // ...this.state.config,
+      // [header]: {
+      //   ...this.state.config[header],
+      //   [keyToChange]: false,
+      // };
+    //     }
+    //   }
+    // }
+
+    // console.log(`contents of mainLibrary: ${this.state.config.mainLibrary}`);
+
     let newBool;
     const currBool = this.state.config[header][rule];
     newBool = !currBool;
@@ -89,14 +118,20 @@ class mainWebpack extends Component {
       if (this.state.props[rule].hasOwnProperty('plugins'))
         newPlugins = [...newPlugins].filter(pluginVal => pluginVal !== this.state.props[rule].plugins);
     }
+      this.setState({...this.state, config: {
+        ...this.state.config,
+        [header]: {
+          ...this.state.config[header],
+          [rule]: newBool,
+        },
+        }, imports: [...newImports], modules: [...newModules], plugins: [...newPlugins],
+        code: document.getElementById('code').innerText});
+   
+    
 
-    this.setState({...this.state, config: {
-      ...this.state.config,
-      [header]: {
-        ...this.state.config[header],
-        [rule]: newBool,
-      },
-    }, imports: [...newImports], modules: [...newModules], plugins: [...newPlugins]});
+    
+
+    navigator.clipboard.writeText(this.state.code);
 
   }
 
@@ -105,36 +140,42 @@ class mainWebpack extends Component {
     fetch('api/user/savedconfigs').then((res) => {
       if (res.status === 200) {
         res.json().then((data) => {
-          this.setState({ isLoggedIn: true });
+          this.props.updateLogin(true);
+          // this.setState({savedConfigs: data.configs });
         });
       }
-  })};
+    });
+  }
 
   render() {
-
     const { config } = this.state;
 
     return (
       <div id='mainwebpack'>
-
         <div id="topButtons">
-          {this.state.isLoggedIn ? (
+          <ExportBtn config={(this.state.code === '' ? "Please select options from EZCode" : this.state.code)} />
+          {/*{this.props.isLoggedIn ? (
             <SaveConfigBtn
               config={this.state.config}
               addSavedConfig={this.addSavedConfig}
               savedConfigs={this.state.savedConfigs}
             />
           ) : null}
-          <ShareBtn config={config} />
-          <SignInBtn isLoggedIn={this.state.isLoggedIn} />
+          <ShareBtn config={config} />*/}
+          <div id="signin-btn">
+            <BackButton />
+            <SignInBtn isLoggedIn={this.props.isLoggedIn} />
+          </div>
         </div>
 
         <div id="content">
           <header id="title">
+          <Link to="/">
             <h1>{'{ EZ-pack }'}</h1>
             <div id="subheader">Webpack configs that don't suck.</div>
+          </Link>
           </header>
-          {this.state.isLoggedIn ? (
+          {this.props.isLoggedIn ? (
             <div>
               {this.state.savedConfigs.length ? <h3>Saved Configs:</h3> : null}
               <SavedConfigs
@@ -143,14 +184,12 @@ class mainWebpack extends Component {
             </div>
           ) : null}
           <div id='webpackcontent'>
-            <Config headers={Object.entries(this.state.config)} updateCode={this.updateCode} />
+            <Config headers={Object.entries(this.state.config)} updateCode={this.updateCode}/>
             <Code imports={this.state.imports} modules={this.state.modules} plugins={this.state.plugins} />
           </div>
           <Instructions />
         </div>
-
       </div>
-
     );
   }
 }

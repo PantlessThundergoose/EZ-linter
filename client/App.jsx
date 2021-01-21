@@ -9,21 +9,31 @@ import {
   useParams,
 } from 'react-router-dom';
 import Home from './Home.js';
+import Navbar from './Navbar';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
+
+    this.updateLogin = this.updateLogin.bind(this);
+
+    this.state = {isLoggedIn: false};
+  }
+
+  updateLogin(bool){
+    this.setState({...this.state, isLoggedIn: bool});
   }
 
   render() {
     return (
       <Router>
+        <Navbar isLogginedIn={this.state.isLoggedIn} updateLogin={this.updateLogin}/>
         <div id="entry">
           <Switch>
             <Route path="/shared/:id" children={<MainRenderer />} />
-            <Route path="/linter" children={<MainLinter />} />
+            <Route path="/linter" children={<MainLinter isLoggedIn={this.state.isLoggedIn} updateLogin={this.updateLogin} />} />
             <Route path="/webpack">
-              <MainWebpack />
+              <MainWebpack isLoggedIn={this.state.isLoggedIn} updateLogin={this.updateLogin} />
             </Route>
             <Route path="/">
               <Home />
